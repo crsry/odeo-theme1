@@ -1,7 +1,5 @@
-{
-  "adRConfig": {
-    "ad_id": "sachin",
-    "timeR": 56000,
-    "active": true
-  }
+"adRConfig": {
+  "ad_id": "sachin",
+  "timeR": 56000,
+  "active": true
 }
