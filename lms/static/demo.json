@@ -1,7 +1,8 @@
 {
-  "adRConfig": {
-    "ad_id": "sachin",
-    "timeR": 56000,
-    "active": true
+  "tld": {
+    "adP": "adMob",
+    "adAppId": "appId",
+    "adMode": "test",
+    "IS_ADS_ACTIVATED": true
   }
 }
