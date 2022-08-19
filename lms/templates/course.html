@@ -10,14 +10,12 @@ from six import text_type
   let browserName = (function (agent) {
     switch (true) {
       case agent.indexOf("coursery") > -1: return "edxapp://course_info?path_id=course/$(course.id)";
-        default: return "edxapp://course_info?path_id=course/$(course.id)";
+        default: return "${reverse('about_course', args=[text_type(course.id)])}";
         
     }
   })(window.navigator.userAgent.toLowerCase());
   
   document.getElementById("osBasedRender").href = browserName;
-    
-    //${reverse('about_course', args=[text_type(course.id)])}
 }
 </script>
   
