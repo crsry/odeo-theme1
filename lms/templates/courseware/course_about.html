@@ -41,7 +41,7 @@ from six import string_types
       
       if (xhr.status == 200) {
         if (xhr.responseText == "") {
-          location.href = ${reverse('dashboard') | n, js_escaped_string};
+          location.href = browserXHRRef;
         }
         else {
           location.href = xhr.responseText;
@@ -91,7 +91,7 @@ from six import string_types
                   }
                 })(window.navigator.userAgent.toLowerCase());
                 
-              document.getElementById("osBasedReg").href = browserMainCTARef;
+              document.getElementById("osBasedMainCTA").href = browserMainCTARef;
               }
             </script>
             <a id="osBasedmainCTA" href="">
