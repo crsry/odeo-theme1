@@ -22,30 +22,30 @@ from six import string_types
   <meta property="og:title" content="${course.display_name_with_default}" />
   <meta property="og:description" content="${get_course_about_section(request, course, 'short_description')}" />
 </%block>
-  
-<script type="text/javascript">
-  window.onload = function osRegisterDeeplinks() {
-  let browserRegisterRef = (function (agent) {
-    switch (true) {
-      case agent.indexOf("coursery") > -1: return "edxapp://enroll?course_id=${course.id}&email_opt_in=true";
-        default: return "${reg_href}";
-    }
-  })(window.navigator.userAgent.toLowerCase());
     
-  let browserMainCTARef = (function (agent) {
-    switch (true) {
-      case agent.indexOf("coursery") > -1: return "edxapp://enrolled_course_info?course_id=${course.id}";
-        default: return "${course_target}";
-    }
-  })(window.navigator.userAgent.toLowerCase());
-
-  document.getElementById("osMainCTARender").href = browserMainCTARef;
-  document.getElementById("osBasedRegister").href = browserRegisterRef;
-}
-</script>
-  
 <%block name="js_extra">
   <script type="text/javascript">
+    
+  window.onload = function osRegisterDeeplinks() {
+    let browserRegisterRef = (function (agent) {
+      switch (true) {
+        case agent.indexOf("coursery") > -1: return "edxapp://enroll?course_id=${course.id}&email_opt_in=true";
+          default: return "${reg_href}";
+      }
+    })(window.navigator.userAgent.toLowerCase());
+    
+    let browserMainCTARef = (function (agent) {
+      switch (true) {
+        case agent.indexOf("coursery") > -1: return "edxapp://enrolled_course_info?course_id=${course.id}";
+          default: return "${course_target}";
+      }
+    })(window.navigator.userAgent.toLowerCase());
+
+    document.getElementById("osMainCTARender").href = browserMainCTARef;
+    document.getElementById("osBasedRegister").href = browserRegisterRef;
+  }
+
+    
   (function() {
     $(".register").click(function(event) {
       $("#class_enroll_form").submit();
