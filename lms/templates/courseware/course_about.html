@@ -32,9 +32,16 @@ from six import string_types
     });
 
     $('#class_enroll_form').on('ajax:complete', function(event, xhr) {
+      let browserXHRRef = (function (agent) {
+        switch (true) {
+            case agent.indexOf("coursery") > -1: return "edxapp://enroll?course_id=$(course.id)&email_opt_in=true";
+            default: return "${reverse('dashboard') | n, js_escaped_string}";
+            }
+      })(window.navigator.userAgent.toLowerCase());
+      
       if (xhr.status == 200) {
         if (xhr.responseText == "") {
-          location.href = "${reverse('dashboard') | n, js_escaped_string}";
+          location.href = browserXHRRef;
         }
         else {
           location.href = xhr.responseText;
@@ -75,7 +82,19 @@ from six import string_types
         <div class="main-cta">
         %if user.is_authenticated and registered:
           %if show_courseware_link:
-            <a href="${course_target}">
+            <script type="text/javascript">
+              window.onload = function osMainCTARendering() {
+                let browserMainCTARef = (function (agent) {
+                  switch (true) {
+                    case agent.indexOf("coursery") > -1: return "edxapp://enrolled_course_info?course_id=$(course.id)";
+                    default: return "${course_target}";
+                  }
+                })(window.navigator.userAgent.toLowerCase());
+                
+              document.getElementById("osBasedReg").href = browserMainCTARef;
+              }
+            </script>
+            <a id="osBasedmainCTA" href="">
           %endif
 
           <span class="register disabled">${_("You are enrolled in this course")}</span>
